@@ -1,0 +1,68 @@
+{
+  "ticker": "INFY",
+  "name": "Infosys",
+  "exchange": "NSE",
+  "periodLabel": "FY26",
+  "badge": "Historical example",
+  "claim": {
+    "metric": "Constant-currency revenue growth",
+    "period": "Full year ended 31 March 2026",
+    "result": {
+      "value": 3.1,
+      "asOf": "2026-04-23",
+      "source": {
+        "label": "Q4 FY26 results press release",
+        "url": "https://www.sec.gov/Archives/edgar/data/0001067491/000106749126000018/exv99w01.htm",
+        "find": "3.1% in constant currency"
+      }
+    },
+    "guidance": {
+      "low": 3.0,
+      "high": 3.5,
+      "asOf": "2026-01-14",
+      "source": {
+        "label": "Q3 FY26 results press release",
+        "url": "https://www.sec.gov/Archives/edgar/data/1067491/000106749126000002/exv99w02.htm",
+        "find": "revised to 3.0%-3.5%"
+      }
+    }
+  },
+  "timeline": [
+    {
+      "date": "2025-04-17",
+      "kind": "Forecast",
+      "title": "Original forecast",
+      "figure": "0–3%",
+      "detail": "Full-year FY26 revenue growth in constant currency, given on the Q4 FY25 earnings call.",
+      "source": {
+        "label": "Q4 FY25 earnings-call transcript (PDF)",
+        "pdf": "https://www.infosys.com/investors/reports-filings/quarterly-results/2024-2025/q4/documents/transcripts/earningscall.pdf",
+        "page": 8
+      }
+    },
+    {
+      "date": "2025-04-17",
+      "kind": "Exclusion",
+      "title": "Acquisition not included",
+      "detail": "The forecast left out the acquisition announced the same day.",
+      "source": {
+        "label": "Q4 FY25 earnings-call transcript (PDF)",
+        "pdf": "https://www.infosys.com/investors/reports-filings/quarterly-results/2024-2025/q4/documents/transcripts/earningscall.pdf",
+        "page": 8
+      }
+    },
+    {
+      "date": "2026-01-14",
+      "kind": "Revision",
+      "title": "Forecast revised",
+      "figure": "3.0–3.5%",
+      "detail": "Announced with Q3 FY26 results. Same metric: constant-currency revenue growth for FY26.",
+      "source": {
+        "label": "Q3 FY26 results press release",
+        "url": "https://www.sec.gov/Archives/edgar/data/1067491/000106749126000002/exv99w02.htm",
+        "find": "revised to 3.0%-3.5%"
+      }
+    }
+  ],
+  "timelineNote": "Any revisions between April 2025 and January 2026 are not shown."
+}

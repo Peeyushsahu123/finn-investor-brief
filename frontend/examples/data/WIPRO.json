@@ -1,0 +1,92 @@
+{
+  "ticker": "WIPRO",
+  "name": "Wipro",
+  "exchange": "NSE",
+  "periodLabel": "Q3 FY26",
+  "badge": "Historical example",
+  "claim": {
+    "metric": "Constant-currency IT Services revenue growth, quarter on quarter",
+    "period": "Quarter ended 31 December 2025",
+    "result": {
+      "value": 1.4,
+      "asOf": "2026-01-16",
+      "source": {
+        "label": "Q3 FY26 results press release",
+        "url": "https://www.wipro.com/newsroom/press-releases/2026/wipro-announces-results-for-the-quarter-ended-december-31-2025/",
+        "find": "1.4% QoQ CC"
+      },
+      "note": "Reported · includes HARMAN DTS"
+    },
+    "guidance": {
+      "low": -0.5,
+      "high": 1.5,
+      "asOf": "2025-10-16",
+      "source": {
+        "label": "Q2 FY26 results press release (outlook)",
+        "url": "https://www.sec.gov/Archives/edgar/data/1123799/000119312525245284/d62510dex991.htm",
+        "find": "to (+)1.5% in constant currency terms"
+      }
+    },
+    "basisNotes": [
+      "The October guidance excluded the HARMAN DTS acquisition, so the chart uses the 0.6% Wipro states without it. The reported 1.4% includes 0.8 points from the acquisition."
+    ],
+    "marker": {
+      "value": 0.6,
+      "label": "0.6% excl. HARMAN DTS",
+      "source": {
+        "label": "Q3 FY26 earnings-call transcript (PDF)",
+        "pdf": "https://www.wipro.com/content/dam/nexus/en/investor/quarterly-results/2025-2026/q3fy26/q3fy26-earnings-transcript.pdf",
+        "page": 3
+      }
+    }
+  },
+  "timeline": [
+    {
+      "date": "2025-10-16",
+      "kind": "Forecast",
+      "title": "Guidance for the quarter",
+      "figure": "−0.5% to +1.5%",
+      "detail": "IT Services revenue growth over the previous quarter, in constant currency (USD 2,591–2,644 million).",
+      "source": {
+        "label": "Q2 FY26 results press release (outlook)",
+        "url": "https://www.sec.gov/Archives/edgar/data/1123799/000119312525245284/d62510dex991.htm",
+        "find": "to (+)1.5% in constant currency terms"
+      }
+    },
+    {
+      "date": "2025-10-16",
+      "kind": "Exclusion",
+      "title": "Acquisition not included",
+      "detail": "The guidance left out the recently announced HARMAN Digital Transformation Solutions acquisition.",
+      "source": {
+        "label": "Q2 FY26 results press release (outlook)",
+        "url": "https://www.sec.gov/Archives/edgar/data/1123799/000119312525245284/d62510dex991.htm",
+        "find": "Digital Transformation Solutions"
+      }
+    },
+    {
+      "date": "2026-01-16",
+      "kind": "Result",
+      "title": "Reported growth",
+      "figure": "1.4%",
+      "detail": "Includes 0.8 points from the HARMAN DTS acquisition, which closed during the quarter.",
+      "source": {
+        "label": "Q3 FY26 results press release",
+        "url": "https://www.wipro.com/newsroom/press-releases/2026/wipro-announces-results-for-the-quarter-ended-december-31-2025/",
+        "find": "1.4% QoQ CC"
+      }
+    },
+    {
+      "date": "2026-01-16",
+      "kind": "Comparison",
+      "title": "Excluding HARMAN DTS",
+      "figure": "0.6%",
+      "detail": "The figure that matches the October forecast, which left the acquisition out.",
+      "source": {
+        "label": "Q3 FY26 earnings-call transcript (PDF)",
+        "pdf": "https://www.wipro.com/content/dam/nexus/en/investor/quarterly-results/2025-2026/q3fy26/q3fy26-earnings-transcript.pdf",
+        "page": 3
+      }
+    }
+  ]
+}
