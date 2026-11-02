@@ -11,7 +11,7 @@ Next, I'd automate the snapshot refresh after market close and check the extract
 
 - [Try FINN](https://finn-investor-brief.onrender.com/)
 - [GitHub repository](https://github.com/Peeyushsahu123/finn-investor-brief)
-- AI build history: [insert Claude and ChatGPT share links, or attach exports]
+- AI build history: [https://claude.ai/share/d0ad62d9-bb28-42ea-a778-b608a03b3d40]
 
 Regards,
 Peeyush Sahu
