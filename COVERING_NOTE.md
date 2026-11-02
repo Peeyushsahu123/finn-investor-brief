@@ -1,22 +1,17 @@
+To: assessment@enam.com
 Subject: ENAM - IIT screening - 2027
 
-Hi team,
+Hi ENAM team,
 
-Please find my submission for the FINN challenge.
+I built FINN to help an investor decide which filings to read first. The mobile dashboard opens on a saved snapshot of 18 NSE stocks from 2 November. You can switch between six hours and 24 hours to see what changed. I focused on the end-of-day brief and kept alerts inside the app.
 
-- Prototype (mobile web): <DEPLOYED LINK>
-- Repository: <GITHUB LINK>
-- AI build history: <CLAUDE CONVERSATION SHARE LINK(S)>
+One detail I paid attention to was the Wipro comparison. Wipro reported 1.4% growth, but its guidance excluded the HARMAN acquisition. I used the comparable 0.6% figure for the chart and kept both numbers visible. I checked on my phone that tapping 0.6% opens page 3 of the earnings-call transcript, where Wipro explains the difference.
 
-**What I built.** FINN, a phone-first investor cockpit with a point of view: the investor shouldn't read filings, they should be told which three things need them. Push: a windowed digest (any period) that classifies, clusters (a results filing plus its five sibling filings become one card), scores and tiers everything, collapsing routine filings; results cards show Revenue/EBITDA/PBT/PAT QoQ and YoY from the filing itself; management-change cards show who left, who joined and the newcomer's background; alerts fire on user-set price, volume and filing-type rules. Pull: chat/voice that returns structured cards for any NSE ticker, centred on a "promised vs delivered" scoreboard that checks management's explicit guidance from the last four calls against reported actuals, plus narrative-vs-numbers, cash quality, balance sheet, trajectory and bull/bear.
+Next, I'd automate the snapshot refresh after market close and check the extracted figures against a hand-reviewed set of filings.
 
-**Key decisions.** (1) Numbers are computed deterministically; the LLM never does arithmetic. (2) Every guidance claim must carry a quote verified verbatim in the transcript, or it is dropped. The check permits differences in whitespace and capitalisation. (3) Pull is grounded only in annual reports, transcripts and statement tables. (4) Cost: regex before LLM, a cheap model for bulk extraction, a strong model only for bull/bear synthesis, content-hash caching everywhere; the app works with no API key at all. (5) Interaction: a ranked feed as the default home, with conversation as the escape hatch, since most days the right answer is "here are the 3 things".
+- [Try FINN](https://finn-investor-brief.onrender.com/)
+- [GitHub repository](https://github.com/Peeyushsahu123/finn-investor-brief)
+- AI build history: [insert Claude and ChatGPT share links, or attach exports]
 
-**Honest limitations.** My build environment blocked egress to Yahoo, NSE and screener.in, so the live connectors are written but unverified end to end; the app auto-falls back to a clearly-labelled synthetic demo universe (fictional companies) that runs the identical pipeline. Please treat the demo mode as the reliable experience while live-source validation remains pending.
-
-**Left out.** Intraday data, BSE, real server-side push, OCR for scanned filings, extraction-accuracy evals on real filings.
-
-**Next.** Verify and harden live sources, add web-push, build a small eval set of real results filings and concalls to measure extraction precision, and weight everything by portfolio position size.
-
-Thanks,
-Peeyush
+Regards,
+Peeyush Sahu
