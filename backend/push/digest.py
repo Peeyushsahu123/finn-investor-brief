@@ -124,7 +124,10 @@ def digest(rules=None, symbols=None):
     names = {u["symbol"]: u for u in uni}
     symbols = symbols or list(names)
     hours = float(rules["window_hours"])
-    since = datetime.now() - timedelta(hours=hours)
+    reference = datetime.now()
+    if provider.mode() == "snapshot":
+        reference = datetime.fromisoformat(provider.snapshot()["asof"]).replace(tzinfo=None)
+    since = reference - timedelta(hours=hours)
     days = max(1, int(hours // 24) + 1)
 
     items = []
@@ -163,7 +166,9 @@ def digest(rules=None, symbols=None):
     for it in cards:
         sc, ctx = _score(it, mk, rules)
         enrich = None
-        if it["cat"] == "results" and sc >= 40:
+        if provider.mode() == "snapshot":
+            pass  # The saved brief links directly to the exchange disclosure.
+        elif it["cat"] == "results" and sc >= 40:
             enrich = results.build(it)
             for u in it.get("alt_urls", []):
                 if enrich:

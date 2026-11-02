@@ -7,4 +7,4 @@ services:
     startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: FINN_MODE
-        value: demo          # live if Yahoo/NSE/screener reachable, else synthetic demo
+        value: snapshot          # live if Yahoo/NSE/screener reachable, else synthetic demo

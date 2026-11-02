@@ -1,5 +1,8 @@
 # FINN — financial investment agent (mobile-first)
 
+[Open FINN](https://finn-investor-brief.onrender.com/). The hosted portfolio is a saved view of 18 real NSE holdings as of 2 November 2026, 22:53 IST. Time filters end at that timestamp. Prices and volumes come from Yahoo Finance, and filing links open the NSE disclosure. The snapshot covers ten days of filings. Research requests outside the saved examples depend on access to the upstream sites. Set FINN_MODE=snapshot to reproduce the hosted brief locally.
+
+
 Push (what changed, ranked) + Pull (grounded research) in one phone-sized web app. FastAPI backend, no-build vanilla-JS frontend.
 
 ## Run

@@ -31,14 +31,14 @@ def _norm(sym, r):
         "symbol": sym,
         "ts": iso,
         "subject": (r.get("desc") or "").strip(),
-        "text": (r.get("attchmtText") or "").strip(),
-        "url": r.get("attchmtFile") or "",
+        "text": (r.get("attchmntText") or r.get("attchmtText") or "").strip(),
+        "url": r.get("attchmntFile") or r.get("attchmtFile") or "",
         "source": "NSE",
     }
 
 
 def fetch_announcements(symbol: str, days: int = 7):
-    key = f"nse:{symbol}:{days}"
+    key = f"nse:v2:{symbol}:{days}"
     hit = cache.get(key, ttl=900)
     if hit is not None:
         return hit

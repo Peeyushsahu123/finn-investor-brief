@@ -96,7 +96,7 @@ function renderToday() {
   const d = S.digest, p = d.pulse, el = $('#t-today');
   const now = p.now, hrs = p.window_hours;
   const winLabel = hrs < 48 ? `${hrs}h` : `${Math.round(hrs / 24)} days`;
-  const big = now === 0 ? 'Quiet. <em>Nothing</em> needs you.' : `<em>${now}</em> thing${now === 1 ? '' : 's'} need${now === 1 ? 's' : ''} you.`;
+  const big = now === 0 ? 'No high-priority filings' : `<em>${now}</em> filing${now === 1 ? '' : 's'} to review`;
   const best = p.best, worst = p.worst;
   const chips = WINDOWS.map(([h, l]) => `<button class="chip ${hrs === h ? 'on' : ''}" data-w="${h}">${l}</button>`).join('') +
     `<button class="chip ${WINDOWS.some(w => w[0] === hrs) ? '' : 'on'}" id="cw">${WINDOWS.some(w => w[0] === hrs) ? 'Custom…' : winLabel}</button>`;
@@ -108,7 +108,7 @@ function renderToday() {
   const rt = tier('routine');
   const routine = rt.length ? `<div class="sec-h"><b>Routine</b><span>collapsed</span></div><details class="routine"><summary><span>${rt.length} routine filing${rt.length > 1 ? 's' : ''} hidden</span><span>›</span></summary>${rt.map(i => `<div class="rrow"><span class="tkr">${esc(i.symbol)}</span><span>${esc(i.headline)}</span><a href="${esc(i.url)}" target="_blank" rel="noopener">↗</a></div>`).join('')}</details>` : '';
   el.innerHTML = `
-  <div class="pulse"><div class="big">${big}</div>
+  <div class="pulse">${d.data.mode === 'snapshot' ? '<p class="note">Portfolio snapshot · '+esc(d.data.asof.replace('T',' ').slice(0,16))+' IST · Past '+winLabel+'</p>' : ''}<div class="big">${big}</div>
    <div class="sub"><span>${p.total} filings across your book in ${winLabel}</span>
    <span class="pill">Book <b class="${cls(p.avg_move)}">${pct(p.avg_move, 2)}</b></span>
    ${best ? `<span class="pill">▲ ${esc(best.symbol)} <b class="up">${pct(best.pct)}</b></span>` : ''}${worst ? `<span class="pill">▼ ${esc(worst.symbol)} <b class="dn">${pct(worst.pct)}</b></span>` : ''}</div></div>
@@ -199,7 +199,7 @@ function renderBook() {
     <div>${spark(x.spark, 64, 26, x.pct >= 0, true)}</div><div class="px"><b>₹${fmt(x.close, 1)}</b><span class="${cls(x.pct)}">${pct(x.pct, 2)}</span><div class="mu" style="font-size:11px">${x.vol_ratio ?? '—'}× vol</div></div></button>`;
   }).join('');
   const sug = (S.meta?.suggested || []).map(s => `<button class="chip" data-sym="${s}">${s}</button>`).join('');
-  el.innerHTML = `<div class="pulse"><div class="big">Your book, <em>one glance</em>.</div><div class="sub">Colour = today’s move. Tap any name for the research view.</div></div>
+  el.innerHTML = `<div class="pulse">${d.data.mode === 'snapshot' ? '<p class="note">Portfolio snapshot · '+esc(d.data.asof.replace('T',' ').slice(0,16))+' IST · Past '+winLabel+'</p>' : ''}<div class="big">Your book, <em>one glance</em>.</div><div class="sub">Colour = today’s move. Tap any name for the research view.</div></div>
   <div class="heat">${tiles}</div>
   <div class="sec-h"><b>Research any NSE ticker</b></div>
   <form class="search" id="sf"><input id="si" placeholder="e.g. ASIANPAINT, HAL, PIDILITIND" autocapitalize="characters" autocomplete="off"><button class="btn pri" type="submit">Research</button></form>
@@ -300,7 +300,7 @@ async function openResearch(sym) {
 const SUGG = [['What changed today?', 'digest of your book'], ['Anything unusual in prices or volume?', 'your thresholds'], ['Nimbus — promised vs delivered', 'guidance scoreboard'], ['Is Halcyon’s balance sheet a problem?', 'leverage & cover'], ['Brightfield cash quality', 'profit → cash']];
 function renderAsk() {
   const el = $('#t-ask');
-  const ex = S.meta?.data?.mode === 'live' ? [['What changed today?', 'digest of your book'], ['Anything unusual in prices or volume?', 'your thresholds'], ['Reliance guidance vs delivery', 'last 4 calls'], ['HAL bull vs bear', 'ad-hoc research']] : SUGG;
+  const ex = S.meta?.data?.mode !== 'demo' ? [['What changed today?', 'digest of your book'], ['Anything unusual in prices or volume?', 'your thresholds'], ['Reliance guidance vs delivery', 'last 4 calls'], ['HAL bull vs bear', 'ad-hoc research']] : SUGG;
   if (!S.thread.length) {
     el.innerHTML = `<div class="empty"><h2>Ask FINN<br>anything about your book.</h2><p>Plain language, or tap the mic. Answers come back as cards, not paragraphs.</p>
     <p>Historical research: <a href="/examples/#/research/INFY">Infosys</a> · <a href="/examples/#/research/WIPRO">Wipro</a></p><div class="sugg">${ex.map(([q, s]) => `<button data-q="${esc(q)}">${esc(q)}<span>${esc(s)}</span></button>`).join('')}</div></div>`;
@@ -359,7 +359,7 @@ async function renderRules() {
   const el = $('#t-rules'), r = S.rules, cats = S.meta?.categories || [];
   const st = await api('/api/stats').catch(() => null);
   const calls = st ? st.llm.calls.cheap + st.llm.calls.strong : 0;
-  el.innerHTML = `<div class="pulse"><div class="big">You decide what’s <em>unusual</em>.</div><div class="sub">FINN watches your end-of-day data and filings against these rules.</div></div>
+  el.innerHTML = `<div class="pulse">${d.data.mode === 'snapshot' ? '<p class="note">Portfolio snapshot · '+esc(d.data.asof.replace('T',' ').slice(0,16))+' IST · Past '+winLabel+'</p>' : ''}<div class="big">You decide what’s <em>unusual</em>.</div><div class="sub">FINN watches your end-of-day data and filings against these rules.</div></div>
   <div class="rule"><div class="l"><b>Price move</b><span id="v1">±${r.price_move_pct}%</span></div><p>Alert when a stock closes beyond this in a day.</p><input type="range" id="r1" min="1" max="10" step=".5" value="${r.price_move_pct}"></div>
   <div class="rule"><div class="l"><b>Volume spike</b><span id="v2">${r.volume_mult}×</span></div><p>Alert when volume exceeds this multiple of its 20-day average.</p><input type="range" id="r2" min="1.2" max="5" step=".1" value="${r.volume_mult}"></div>
   <div class="rule"><div class="l"><b>Filing types</b><span style="font-size:13px;color:var(--mu)">tap to cycle</span></div><p><b style="color:var(--ac)">Watch</b> raises priority and triggers alerts · <b>Normal</b> · <b>Mute</b> buries it.</p>
@@ -391,7 +391,7 @@ $$('nav.bar button').forEach(b => b.onclick = () => { if (b.dataset.t === 'today
     S.meta = await api('/api/meta');
     if (!Object.keys(S.rules.cats || {}).length) { S.rules.cats = {}; (S.meta.defaults.watch || []).forEach(c => S.rules.cats[c] = 'watch'); saveRules(); }
     const demo = S.meta.data.mode === 'demo';
-    $('#badge').className = 'badge ' + (demo ? 'demo' : ''); $('#badge span').textContent = demo ? 'Demo data' : 'Live';
+    $('#badge').className = 'badge ' + (demo ? 'demo' : ''); $('#badge span').textContent = demo ? 'Demo data' : S.meta.data.mode === 'snapshot' ? 'Saved portfolio' : 'Live';
     $('#badge').title = demo ? 'Synthetic data (fictional companies). ' + (S.meta.data.reason || '') : 'Live NSE / Yahoo / screener.in';
   } catch (e) { }
   loadToday();

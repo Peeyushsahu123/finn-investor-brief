@@ -80,7 +80,7 @@ def _resolve_symbol(q, hint=None):
     for s, u in uni.items():
         if re.search(rf"\b{re.escape(s.lower())}\b", ql) or u["name"].lower() in ql or u["name"].lower().split()[0] in ql.split():
             return s
-    if provider.mode() == "live":
+    if provider.mode() in ("snapshot", "live"):
         for tok in re.findall(r"\b[A-Z][A-Z&\-]{1,14}\b", q):
             if tok not in {"I", "FY", "QOQ", "YOY", "PAT", "PBT", "EBITDA", "FCF", "AR", "ROCE", "NSE", "BSE", "VS", "THE"}:
                 return tok
